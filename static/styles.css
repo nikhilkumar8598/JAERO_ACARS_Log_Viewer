@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000; /* Black background */
+    color: #00FF00; /* Green text */
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 10px;
+    background: #222222; /* Dark grey background for the container */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    color: white; /* Green text for title */
+    position: sticky;
+    top: 0;
+    background-color: #222222; /* Dark background for title */
+    padding: 10px;
+    z-index: 10;  /* Ensures the title stays on top */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Optional: adds shadow for effect */
+    margin: 0;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border: 1px solid #555555; /* Dark border for search box */
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 56px;  /* Increased from 50px to 56px to provide more space */
+    z-index: 5;
+    background-color: #333333; /* Dark background for input */
+    color: white; /* Green text for input */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2px;  /* Adjust for extra space for search box */
+	table-layout: auto; /* Ensures the table columns are fixed in size */
+}
+
+thead th {
+    position: sticky;
+    top: 92px;  /* Adjust for title and search box */
+    background-color: #222222; /* Dark background for header */
+    font-weight: bold;
+    color: white; /* Green text for header */
+    z-index: 5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Optional: adds shadow to the header */
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #555555; /* Darker border for table rows */
+	word-wrap: break-word;
+}
+
+td pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    margin: 0;
+}
+
+tr:hover {
+    background-color: #444444; /* Dark grey hover effect */
+}
+
+/* Set a maximum width for the message column to prevent overflow */
+td:nth-child(4) { 
+    max-width: 1500px; /* Adjust as needed */
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
+
+/* Status Dot */
+.status-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: red; /* Default is red (assume error until proven ok) */
+    margin-left: 10px;
+    vertical-align: middle;
+}
+

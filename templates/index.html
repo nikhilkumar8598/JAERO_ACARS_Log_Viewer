@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAERO ACARS Log Viewer</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script>
+        function refreshPage() {
+			// Get the current search term
+			const serverStatus = document.getElementById("server-status");
+			const searchBox = document.getElementById("search-box");
+			const searchTerm = searchBox.value.toLowerCase();
+            fetch('/api/entries')
+                .then(response => {
+                    if (response.ok) {
+                        serverStatus.style.backgroundColor = "green"; // Green dot for OK
+                    } else {
+                        serverStatus.style.backgroundColor = "red"; // Red dot for error
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const tableBody = document.getElementById("entries-body");
+                    tableBody.innerHTML = "";
+                    data.forEach(entry => {
+                        const row = document.createElement("tr");
+
+                        const timestampCell = document.createElement("td");
+                        timestampCell.textContent = entry.timestamp;
+                        row.appendChild(timestampCell);
+
+                        const registrationCell = document.createElement("td");
+                        registrationCell.textContent = entry.registration;
+                        row.appendChild(registrationCell);
+
+                        const aircraftCell = document.createElement("td");
+                        aircraftCell.textContent = entry.aircraft_and_airline;
+                        row.appendChild(aircraftCell);
+
+                        const messageCell = document.createElement("td");
+                        const pre = document.createElement("pre");
+                        pre.textContent = entry.message; // Preserve formatting using <pre>
+                        messageCell.appendChild(pre);
+                        row.appendChild(messageCell);
+
+                        tableBody.appendChild(row);
+                    });
+					// Reapply the filter after refreshing
+					filterEntries();
+                })
+				.catch(error => {
+                    console.error("Error fetching data:", error);
+                    serverStatus.style.backgroundColor = "red"; // Red dot for error
+                });
+        }
+
+        function filterEntries() {
+            const searchTerm = document.getElementById("search-box").value.toLowerCase();
+            const rows = document.querySelectorAll("#entries-body tr");
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? "" : "none";
+            });
+        }
+
+        setInterval(refreshPage, 30000); // Refresh every 30 seconds
+        window.onload = refreshPage;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            JAERO ACARS Log Viewer
+            <span id="server-status" class="status-dot"></span>
+        </h1>
+        <input type="text" id="search-box" placeholder="Search..." oninput="filterEntries()">
+        <table>
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Registration</th>
+                    <th>Aircraft and Airline</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody id="entries-body">
+                <!-- Entries will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
