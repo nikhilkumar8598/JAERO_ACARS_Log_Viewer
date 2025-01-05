@@ -1,7 +1,7 @@
 
 # JAERO ACARS Log Viewer
 
-The **JAERO ACARS Log Viewer** is a web-based application designed to parse and display ACARS (Aircraft Communications Addressing and Reporting System) logs in real-time. This app dynamically updates log entries and provides a convenient search feature for filtering log data. A server status indicator is also included to reflect the application's health.
+The **JAERO ACARS Log Viewer** is a web-based application designed to parse and display ACARS (Aircraft Communications Addressing and Reporting System) logs in real-time from JAERO. This app dynamically updates log entries and provides a convenient search feature for filtering log data. A server status indicator is also included to reflect the application's health.
 
 ---
 
@@ -20,7 +20,7 @@ The **JAERO ACARS Log Viewer** is a web-based application designed to parse and 
 - Python 3.7 or later.
 - Flask, collections, html, glob, logging.
 - Basic knowledge of running Python applications.
-
+- JAERO: https://github.com/jontio/JAERO with logging enabled.
 ---
 
 ## Installation
